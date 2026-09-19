@@ -59,50 +59,35 @@ const projects = [
   },
 ]
 
-const skillGroups = [
+const technicalSkills = [
   {
-    title: 'Languages',
-    icon: Code2,
-    items: [
-      { name: 'JavaScript', level: 92, note: 'Interactive UIs and modern app logic', icon: Zap },
-      { name: 'Python', level: 84, note: 'Scripting, automation, and backend patterns', icon: Sparkles },
-      { name: 'PHP', level: 78, note: 'Server-side workflows and dashboards', icon: Server },
-    ],
+    category: 'Languages',
+    skills: ['JavaScript', 'Python', 'C'],
   },
   {
-    title: 'Frontend',
-    icon: Palette,
-    items: [
-      { name: 'React', level: 90, note: 'Reusable components and polished UX', icon: Zap },
-      { name: 'HTML/CSS', level: 88, note: 'Flexible layouts and visual systems', icon: Palette },
-      { name: 'Tailwind', level: 85, note: 'Fast, expressive UI styling', icon: Sparkles },
-    ],
+    category: 'Frontend',
+    skills: ['React.js', 'HTML', 'CSS'],
   },
   {
-    title: 'Backend',
-    icon: Server,
-    items: [
-      { name: 'Node.js', level: 86, note: 'Realtime backends and APIs', icon: Server },
-      { name: 'Express', level: 82, note: 'API routing and middleware', icon: Globe },
-      { name: 'Django', level: 76, note: 'Structured app architecture', icon: Database },
-    ],
+    category: 'Backend',
+    skills: ['Node.js', 'Express.js', 'FastAPI'],
   },
   {
-    title: 'Databases',
-    icon: Database,
-    items: [
-      { name: 'MongoDB', level: 82, note: 'Flexible document data models', icon: Database },
-      { name: 'MySQL', level: 78, note: 'Reliable relational storage', icon: Database },
-      { name: 'REST APIs', level: 84, note: 'Seamless data exchange between layers', icon: Globe },
-    ],
+    category: 'Databases',
+    skills: ['MongoDB', 'MySQL'],
   },
   {
-    title: 'Tools',
-    icon: Wrench,
-    items: [
-      { name: 'Git/GitHub', level: 88, note: 'Version control and clean collaboration', icon: Wrench },
-      { name: 'Vercel', level: 80, note: 'Fast deployment and previews', icon: Zap },
-      { name: 'VS Code', level: 85, note: 'Productive coding workflow', icon: Code2 },
+    category: 'Tools & Platforms',
+    skills: ['Git', 'GitHub', 'VS Code', 'Postman', 'Vercel', 'Render'],
+  },
+  {
+    category: 'Core Computer Science',
+    skills: [
+      'Data Structures & Algorithms',
+      'DBMS',
+      'Operating Systems',
+      'Computer Networks',
+      'Object-Oriented Programming',
     ],
   },
 ]
@@ -586,22 +571,35 @@ function AboutSection() {
         </div>
       </div>
 
-      {/* Skills & Certifications */}
+      {/* Technical Skills & Certifications */}
       <div className="pt-8 border-t border-slate-200/70 grid gap-12 lg:grid-cols-12">
         <div className="lg:col-span-7">
           <div className="mb-6 flex items-center justify-between">
             <div>
-              <p className="text-xs font-extrabold uppercase tracking-[0.35em] text-slate-400">Tech Stack</p>
+              <p className="text-xs font-extrabold uppercase tracking-[0.35em] text-slate-400">Technical Skills</p>
               <h3 className="mt-1 text-2xl font-extrabold text-slate-900">Skills & Tooling</h3>
             </div>
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500">MERN + Tools</span>
           </div>
 
-          <div className="grid gap-6 sm:grid-cols-2">
-            {skillGroups.map((group) => {
-              const Icon = group.icon
-              return <SkillCard key={group.title} group={group} Icon={Icon} />
-            })}
+          <div className="grid gap-8 sm:grid-cols-2">
+            {technicalSkills.map((group) => (
+              <div key={group.category} className="space-y-3">
+                <h4 className="text-xs font-extrabold uppercase tracking-[0.25em] text-slate-400">
+                  {group.category}
+                </h4>
+                <div className="flex flex-wrap gap-2">
+                  {group.skills.map((skill) => (
+                    <span
+                      key={skill}
+                      className="inline-flex items-center rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-bold text-slate-800 shadow-2xs transition-all duration-200 hover:-translate-y-0.5 hover:border-slate-900 hover:text-slate-900 hover:shadow-xs"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 
@@ -636,67 +634,6 @@ function AboutSection() {
         </div>
       </div>
     </section>
-  )
-}
-
-function SkillCard({ group, Icon }) {
-  const [flipped, setFlipped] = useState(false)
-
-  const toggleFlip = () => setFlipped((value) => !value)
-
-  return (
-    <motion.button
-      type="button"
-      whileHover={{ y: -4 }}
-      className="flip-card group h-52 w-full text-left outline-none"
-      onClick={toggleFlip}
-      onKeyDown={(event) => {
-        if (event.key === 'Enter' || event.key === ' ') {
-          event.preventDefault()
-          toggleFlip()
-        }
-      }}
-      aria-label={`Toggle ${group.title} skill details`}
-    >
-      <div className={`flip-card-inner ${flipped ? 'flipped' : ''}`}>
-        <div className="flip-card-face flip-card-front rounded-2xl border border-slate-200/80 bg-white p-5 text-slate-900 shadow-2xs transition group-hover:border-slate-300">
-          <div className="mb-4 flex items-center justify-between">
-            <div className="rounded-xl border border-slate-200 bg-slate-50 p-2.5 text-slate-900">
-              <Icon size={20} />
-            </div>
-            <span className="text-[11px] font-extrabold uppercase tracking-[0.25em] text-slate-400">{group.title}</span>
-          </div>
-          <div className="mt-4">
-            <p className="text-xl font-bold text-slate-900">{group.items[0].name}</p>
-            <p className="mt-1.5 text-xs font-semibold text-slate-500 flex items-center gap-1">
-              <span>Tap to reveal levels</span> <ArrowRight size={12} />
-            </p>
-          </div>
-        </div>
-        <div className="flip-card-face flip-card-back rounded-2xl border border-slate-200 bg-white p-5 text-slate-900 shadow-xs">
-          <div className="flex items-center justify-between pb-2 border-b border-slate-100">
-            <span className="text-xs font-extrabold uppercase tracking-[0.2em] text-slate-800">{group.title}</span>
-            <Sparkles size={16} className="text-slate-400" />
-          </div>
-          <div className="mt-3 space-y-2">
-            {group.items.map((item) => {
-              const ItemIcon = item.icon
-              return (
-                <div key={item.name} className="rounded-xl border border-slate-100 bg-slate-50/80 p-2 text-xs">
-                  <div className="flex items-center justify-between font-bold text-slate-800">
-                    <span className="flex items-center gap-1.5"><ItemIcon size={14} className="text-slate-600" />{item.name}</span>
-                    <span className="font-extrabold text-slate-900">{item.level}%</span>
-                  </div>
-                  <div className="mt-1 w-full overflow-hidden rounded-full bg-slate-200/80 h-1">
-                    <div className="h-full bg-slate-900 rounded-full" style={{ width: `${item.level}%` }} />
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-        </div>
-      </div>
-    </motion.button>
   )
 }
 

@@ -114,34 +114,7 @@ textarea:focus-visible {
   overflow: hidden;
 }
 
-/* Interactive Flip Cards */
-.flip-card {
-  perspective: 1200px;
-}
 
-.flip-card-inner {
-  position: relative;
-  height: 100%;
-  transform-style: preserve-3d;
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  cursor: pointer;
-}
-
-.flip-card-inner.flipped,
-.flip-card:hover .flip-card-inner {
-  transform: rotateY(180deg);
-}
-
-.flip-card-face {
-  position: absolute;
-  inset: 0;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-
-.flip-card-back {
-  transform: rotateY(180deg);
-}
 
 /* Vertical Timeline Line */
 .timeline-axis {
