@@ -145,12 +145,6 @@ const blogPosts = [
   { title: 'Turning a concept into an MVP', excerpt: 'A practical approach to translating an idea into a usable product with clear milestones.', readTime: '5 min read', link: '#' },
 ]
 
-const openSource = [
-  { repo: 'UI polish helpers', description: 'Contribution notes for shared UI refinements and reusable interaction patterns.', link: '#' },
-  { repo: 'Starter templates', description: 'Improved developer experience for scaffolded projects with better defaults and clearer docs.', link: '#' },
-  { repo: 'Accessibility fixes', description: 'Small but meaningful updates focused on keyboard navigation and contrast improvements.', link: '#' },
-]
-
 const testimonials = [
   { name: 'Aarav R.', role: 'Product peer', relationship: 'Collaboration', quote: 'Akshatha brings calm clarity to product ideas and turns them into polished experiences.' },
   { name: 'Meera S.', role: 'Mentor', relationship: 'Learning circle', quote: 'She balances technical depth with a strong eye for user experience and design quality.' },
@@ -784,24 +778,6 @@ function ProjectsSection() {
             </div>
           </div>
         ))}
-      </div>
-
-      {/* Open Source Section */}
-      <div className="pt-8 border-t border-slate-200/70">
-        <p className="text-xs font-extrabold uppercase tracking-[0.35em] text-slate-400">Open Source</p>
-        <h3 className="mt-2 text-2xl font-extrabold text-slate-900">Shared Contributions</h3>
-
-        <div className="mt-6 grid gap-8 md:grid-cols-3">
-          {openSource.map((item) => (
-            <div key={item.repo} className="pb-4 border-b md:border-b-0 md:border-r border-slate-200/70 pr-4 last:border-0">
-              <p className="text-lg font-bold text-slate-900">{item.repo}</p>
-              <p className="mt-2 text-sm leading-relaxed text-slate-600">{item.description}</p>
-              <a href={item.link} className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold text-slate-900 transition hover:underline">
-                View PR / Commit ↗
-              </a>
-            </div>
-          ))}
-        </div>
       </div>
 
       <AnimatePresence>{activeCaseStudy ? <CaseStudyModal project={activeCaseStudy} onClose={() => setActiveCaseStudy(null)} /> : null}</AnimatePresence>
