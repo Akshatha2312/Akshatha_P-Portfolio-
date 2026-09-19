@@ -234,6 +234,11 @@ function AppShell() {
 
   return (
     <div className="relative min-h-screen bg-[#fafafa] text-slate-900 transition-colors duration-300 antialiased selection:bg-slate-900 selection:text-white">
+      {/* Top Scroll Progress Line */}
+      <div className="fixed top-0 left-0 right-0 z-[60] h-0.5 bg-slate-200/60 pointer-events-none">
+        <motion.div className="h-full bg-slate-900" style={{ width: `${explorer * 100}%` }} />
+      </div>
+
       <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-[1400px] flex-col px-6 sm:px-10 lg:px-16 py-6">
         {/* Minimal Lightweight Header */}
         <header className="sticky top-0 z-50 mb-10 bg-[#fafafa]/90 py-4 backdrop-blur-md transition-all duration-300 border-b border-slate-200/60">
@@ -652,8 +657,12 @@ function ProjectsSection() {
 
       <div className="space-y-12">
         {projects.map((project, index) => (
-          <div
+          <motion.div
             key={project.title}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.4, delay: index * 0.1 }}
             className="group pb-12 border-b border-slate-200/80 grid gap-8 lg:grid-cols-12 items-start transition-all duration-300"
           >
             <div className="lg:col-span-4">
@@ -709,7 +718,7 @@ function ProjectsSection() {
                 ) : null}
               </div>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
 
