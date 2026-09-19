@@ -533,9 +533,6 @@ function AboutSection() {
           >
             Download Resume ↓
           </a>
-          <button type="button" onClick={() => window.print()} className="btn-secondary rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-bold text-slate-800 transition hover:border-slate-900 hover:-translate-y-0.5 active:translate-y-0">
-            Print Resume
-          </button>
           <a href="/contact" className="btn-secondary rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-bold text-slate-800 transition hover:border-slate-900 hover:-translate-y-0.5 active:translate-y-0">
             Let&apos;s Connect
           </a>
