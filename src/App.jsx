@@ -120,7 +120,6 @@ const certificationGroups = [
     category: 'Web Development',
     items: [
       { name: 'MERN Stack Certificate', platform: 'Coursera', date: '2025', link: '#' },
-      { name: 'Full Stack Web Development', platform: 'Udemy', date: '2024', link: '#' },
       { name: 'Frontend Web Development', platform: 'LinkedIn Learning', link: 'https://www.linkedin.com/learning/certificates/141b34bd9057a90cabfd114bf9c178ec505528878ff22ce4a5166178c783328a?trk=share_certificate' },
     ],
   },
