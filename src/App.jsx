@@ -22,22 +22,31 @@ import {
   Zap,
 } from 'lucide-react'
 import { sendContactEmail } from './emailjsService'
+import profileImage from './assets/profile.jpeg'
+import resumePDF from './assets/Akshatha Prabakaran.pdf'
 import './App.css'
 
 const projects = [
+  {
+    title: 'Home Fix',
+    description: 'Home Fix — Service booking flow for local professionals.',
+    stack: ['React', 'Node.js', 'MongoDB'],
+    github: 'https://github.com/Akshatha2312/home_fix.git',
+    demo: 'https://home-fix.vercel.app/',
+  },
+  {
+    title: 'Cravory',
+    description: 'Cravory — A MERN-based multi-vendor bakery marketplace where customers can discover bakeries, browse products, manage carts/wishlists, and place orders.',
+    stack: ['MongoDB', 'Express', 'React', 'Node.js'],
+    github: 'https://github.com/Akshatha2312',
+    demo: 'https://cravory-beta.vercel.app/',
+  },
   {
     title: 'Click Pilot',
     description: 'Click Pilot — A demo project showcasing interactive flows and UI polish.',
     stack: ['React'],
     github: 'https://github.com/Akshatha2312/click-pilot.git',
     demo: 'https://click-pilot.vercel.app/',
-  },
-  {
-    title: 'Home Fix',
-    description: 'Home Fix — Service booking flow for local professionals.',
-    stack: ['React', 'Node.js'],
-    github: 'https://github.com/Akshatha2312/home_fix.git',
-    demo: 'https://home-fix.vercel.app/',
   },
   {
     title: 'The Action Guardrail',
@@ -47,27 +56,6 @@ const projects = [
     demo: 'https://the-action-guardrail.vercel.app/',
     youtube: 'https://lnkd.in/ekq2DKam',
     additionalLink: 'https://lnkd.in/eqb3TMUr',
-  },
-  {
-    title: 'Field Visit Tracker',
-    description: 'Field Visit Tracker — Attendance and visit monitoring tool.',
-    stack: ['Django', 'Python'],
-    github: 'https://github.com/Akshatha2312/Field-Visit-Tracker.git',
-    demo: '',
-  },
-  {
-    title: 'Ticketing System',
-    description: 'Ticketing System — Issue tracking and triage dashboard.',
-    stack: ['PHP', 'MySQL'],
-    github: 'https://github.com/Akshatha2312/Ticketing-System.git',
-    demo: '',
-  },
-  {
-    title: "Achu's Home Foods",
-    description: "Achu's Home Foods — Small business site and ordering demo.",
-    stack: ['Web'],
-    github: 'https://github.com/Akshatha2312/Achushomefoods.git',
-    demo: '',
   },
 ]
 
@@ -267,38 +255,80 @@ function AppShell() {
   const glowStyle = useMemo(() => ({ transform: `translate(${mouse.x / 40}px, ${mouse.y / 40}px)` }), [mouse.x, mouse.y])
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-white text-black transition-colors duration-300">
-      <motion.div className="pointer-events-none absolute inset-0 opacity-0" animate={{ opacity: 0 }} transition={{ duration: 0 }} style={{ backgroundImage: 'none' }} />
-      <div className="mx-auto flex min-h-screen max-w-7xl flex-col px-4 py-4 sm:px-6 lg:px-8">
-        <header className="sticky top-4 z-50 mb-6 rounded-full border border-black/10 bg-white px-4 py-3 shadow-sm backdrop-blur">
-          <div className="flex items-center justify-between gap-2">
-            <NavLink to="/" className="text-lg font-semibold tracking-[0.3em] text-black">AKSHATHA</NavLink>
-            <nav className="hidden items-center gap-6 md:flex" aria-label="Primary navigation">
+    <div className="relative min-h-screen bg-[#fafafa] text-slate-900 transition-colors duration-300 antialiased selection:bg-slate-900 selection:text-white">
+      <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-[1400px] flex-col px-6 sm:px-10 lg:px-16 py-6">
+        {/* Minimal Lightweight Header */}
+        <header className="sticky top-0 z-50 mb-10 bg-[#fafafa]/90 py-4 backdrop-blur-md transition-all duration-300 border-b border-slate-200/60">
+          <div className="flex items-center justify-between gap-6">
+            <NavLink to="/" className="group flex items-center gap-2.5 text-xl font-extrabold tracking-[0.2em] text-slate-900 transition hover:opacity-80">
+              <span className="flex h-2.5 w-2.5 rounded-full bg-slate-900 transition-transform duration-300 group-hover:scale-125" />
+              AKSHATHA
+            </NavLink>
+            <nav className="hidden items-center gap-8 md:flex" aria-label="Primary navigation">
               {navItems.map((item) => (
-                <NavLink key={item.to} to={item.to} className={({ isActive }) => `text-sm font-medium transition ${isActive ? 'text-black' : 'text-black/60 hover:text-black'}`}>
+                <NavLink
+                  key={item.to}
+                  to={item.to}
+                  className={({ isActive }) =>
+                    `relative py-1 text-sm font-bold tracking-wide transition-all duration-200 ${
+                      isActive
+                        ? 'text-slate-900 border-b-2 border-slate-900'
+                        : 'text-slate-500 hover:text-slate-900'
+                    }`
+                  }
+                >
                   {item.label}
                 </NavLink>
               ))}
-              <button type="button" onClick={() => { setSecretUnlocked(true); setToastMessage('Secret unlocked — developer mode activated ✨'); setToast(true) }} className="rounded-full border border-dashed border-black/10 bg-black/5 px-2.5 py-1 text-xs font-semibold text-black/80" title="Secret shortcut">☄</button>
+              <button
+                type="button"
+                onClick={() => {
+                  setSecretUnlocked(true)
+                  setToastMessage('Secret unlocked — developer mode activated ✨')
+                  setToast(true)
+                }}
+                className="ml-2 rounded-full border border-slate-200 bg-white px-2.5 py-1 text-xs font-semibold text-slate-600 transition hover:border-slate-400 hover:text-slate-900"
+                title="Secret shortcut"
+              >
+                ☄
+              </button>
             </nav>
-            <div className="flex items-center gap-2">
-              <button type="button" onClick={() => setMenuOpen(!menuOpen)} className="rounded-full border border-black/10 bg-black/5 p-2 text-black md:hidden" aria-label="Open menu" aria-expanded={menuOpen}>{menuOpen ? <X size={18} /> : <Menu size={18} />}</button>
+            <div className="flex items-center gap-2 md:hidden">
+              <button
+                type="button"
+                onClick={() => setMenuOpen(!menuOpen)}
+                className="rounded-xl border border-slate-200 bg-white p-2.5 text-slate-900 transition hover:bg-slate-100"
+                aria-label="Open menu"
+                aria-expanded={menuOpen}
+              >
+                {menuOpen ? <X size={20} /> : <Menu size={20} />}
+              </button>
             </div>
           </div>
           {menuOpen && (
-            <div className="mt-4 flex flex-col gap-3 border-t border-black/10 pt-3 md:hidden">
+            <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="mt-4 flex flex-col gap-3 border-t border-slate-200/80 pt-4 md:hidden">
               {navItems.map((item) => (
-                <NavLink key={item.to} to={item.to} onClick={() => setMenuOpen(false)} className={({ isActive }) => `text-sm font-medium ${isActive ? 'text-black' : 'text-black/60'}`}>
+                <NavLink
+                  key={item.to}
+                  to={item.to}
+                  onClick={() => setMenuOpen(false)}
+                  className={({ isActive }) =>
+                    `py-2 text-base font-bold transition ${
+                      isActive ? 'text-slate-900 font-extrabold' : 'text-slate-500 hover:text-slate-900'
+                    }`
+                  }
+                >
                   {item.label}
                 </NavLink>
               ))}
-            </div>
+            </motion.div>
           )}
         </header>
 
-        <main className="flex-1 rounded-[2rem] border border-black/10 bg-white p-4 shadow-sm sm:p-6 lg:p-8">
+        {/* Main Content Viewport */}
+        <main className="flex-1 w-full min-h-[calc(100vh-200px)]">
           <AnimatePresence mode="wait">
-            <motion.div key={location.pathname} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: 0.35 }}>
+            <motion.div key={location.pathname} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.25 }}>
               <Routes location={location}>
                 <Route path="/" element={<HomeSection glowStyle={glowStyle} />} />
                 <Route path="/about" element={<AboutSection />} />
@@ -309,35 +339,56 @@ function AppShell() {
           </AnimatePresence>
         </main>
 
-        <footer className="mt-6 flex flex-wrap items-center justify-center gap-3 rounded-[1.5rem] border border-black/10 bg-white px-4 py-3 text-sm text-black/60 shadow-sm">
-          <a href="/contact" className="font-semibold text-black transition hover:text-black/70">Let&apos;s collaborate</a>
+        {/* Minimal Footer */}
+        <footer className="mt-16 flex flex-wrap items-center justify-between gap-4 border-t border-slate-200/80 py-8 text-sm text-slate-500">
+          <p className="font-medium text-slate-600">AKSHATHA — Full Stack Developer © {new Date().getFullYear()}</p>
+          <div className="flex items-center gap-6">
+            <a href="https://github.com/Akshatha2312" target="_blank" rel="noreferrer" className="font-semibold text-slate-600 transition hover:text-slate-900">GitHub</a>
+            <a href="https://linkedin.com/in/akshatha23" target="_blank" rel="noreferrer" className="font-semibold text-slate-600 transition hover:text-slate-900">LinkedIn</a>
+            <a href="/contact" className="font-bold text-slate-900 transition hover:underline">Let&apos;s collaborate →</a>
+          </div>
         </footer>
 
-        <div className="fixed bottom-4 right-4 z-50 flex flex-col items-end gap-3">
-          <div className="rounded-full border border-black/10 bg-white px-4 py-2 text-sm font-semibold text-black shadow-sm">Site Explorer {Math.round(explorer * 100)}%</div>
-          <div className="w-48 overflow-hidden rounded-full border border-black/10 bg-black/5">
-            <motion.div className="h-2 rounded-full bg-black/30" animate={{ width: `${explorer * 100}%` }} transition={{ type: 'spring', stiffness: 140, damping: 18 }} />
+        {/* Floating Explorer Badge */}
+        <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-2.5">
+          <div className="rounded-full border border-slate-200 bg-white/95 px-4 py-2 text-xs font-bold text-slate-800 shadow-sm backdrop-blur-md">
+            Site Explorer <span className="text-slate-900 font-extrabold">{Math.round(explorer * 100)}%</span>
+          </div>
+          <div className="w-36 overflow-hidden rounded-full border border-slate-200 bg-slate-200/80 p-0.5">
+            <motion.div className="h-1 rounded-full bg-slate-900" animate={{ width: `${explorer * 100}%` }} transition={{ type: 'spring', stiffness: 140, damping: 18 }} />
           </div>
           {celebrate && <ConfettiBurst />}
         </div>
 
-        <button type="button" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className={`fixed bottom-6 left-4 z-50 rounded-full bg-black/10 p-3 text-black shadow-sm transition ${scrollTopVisible ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-4 opacity-0'}`} aria-label="Scroll to top">↑</button>
+        {/* Scroll To Top Button */}
+        <button
+          type="button"
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          className={`fixed bottom-6 left-6 z-40 rounded-full border border-slate-200 bg-white/95 p-3 text-slate-900 shadow-sm transition-all duration-300 hover:bg-slate-900 hover:text-white hover:shadow-md ${
+            scrollTopVisible ? 'translate-y-0 opacity-100 scale-100' : 'pointer-events-none translate-y-4 opacity-0 scale-90'
+          }`}
+          aria-label="Scroll to top"
+        >
+          ↑
+        </button>
 
+        {/* Toast Notification */}
         <AnimatePresence>
           {toast && (
-            <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 8 }} className="fixed bottom-6 left-1/2 z-[60] -translate-x-1/2 rounded-full border border-black/10 bg-white px-4 py-2 text-sm font-medium text-black shadow-md">
+            <motion.div initial={{ opacity: 0, y: 16, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 8, scale: 0.95 }} className="fixed bottom-8 left-1/2 z-[60] -translate-x-1/2 rounded-full border border-slate-200 bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white shadow-xl">
               {toastMessage}
             </motion.div>
           )}
         </AnimatePresence>
 
+        {/* Loading Overlay */}
         <AnimatePresence>
           {loading && (
-            <motion.div initial={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[70] flex items-center justify-center bg-white/95 text-black">
+            <motion.div initial={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[70] flex items-center justify-center bg-slate-50/95 text-slate-900 backdrop-blur-md">
               <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 0.4 }} className="text-center">
-                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border border-black/10 bg-black/5 text-3xl font-black text-black">A</div>
-                <p className="mt-4 text-lg font-semibold tracking-[0.3em]">LOADING PORTFOLIO</p>
-                <p className="mt-2 text-sm text-black/60">Crafting a premium monochrome experience</p>
+                <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full border border-slate-200 bg-white shadow-md text-4xl font-extrabold text-slate-900 animate-pulse">A</div>
+                <p className="mt-5 text-xl font-extrabold tracking-[0.3em] text-slate-900">LOADING PORTFOLIO</p>
+                <p className="mt-2 text-sm font-medium text-slate-500">Crafting a premium web experience</p>
               </motion.div>
             </motion.div>
           )}
@@ -347,71 +398,113 @@ function AppShell() {
   )
 }
 
-function HomeSection({ glowStyle }) {
+function HomeSection() {
   const [imageError, setImageError] = useState(false)
 
   return (
-    <section id="home" className="relative overflow-hidden rounded-[2rem] bg-white px-6 py-16 text-black sm:px-10 lg:px-14 lg:py-24">
-      <div className="absolute inset-0 bg-transparent" />
-      <div className="absolute inset-0 opacity-0">
-        <div className="absolute h-64 w-64 rounded-full bg-black/5 blur-3xl" style={glowStyle} />
-        <div className="absolute right-10 top-20 h-72 w-72 rounded-full bg-black/3 blur-3xl" style={glowStyle} />
-      </div>
-      <div className="relative grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]">
-        <div className="max-w-2xl">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-black/10 bg-black/5 px-3 py-1 text-sm font-medium text-black/70 backdrop-blur"><BrainCircuit size={16} /> Building bold digital experiences</div>
-          <h1 className="text-4xl font-black leading-[0.95] sm:text-5xl lg:text-7xl">Hi, I&apos;m <span className="text-black">Akshatha</span></h1>
-          <p className="mt-4 text-lg text-black/70 sm:text-xl">Full Stack Developer | MERN | Problem Solver</p>
-          <p className="mt-6 max-w-xl text-base leading-8 text-black/70 sm:text-lg">I turn ideas into performant, intuitive web applications with a strong mix of engineering discipline, visual design, and product thinking.</p>
-          <div className="mt-8 flex flex-wrap gap-4">
-            <a href="/contact" className="inline-flex items-center gap-2 rounded-full bg-black px-5 py-3 font-semibold text-white transition hover:bg-black/80">Hire Me <ArrowRight size={18} /></a>
-            <a href="/assets/resume.pdf" className="inline-flex items-center gap-2 rounded-full border border-black/20 bg-white px-5 py-3 font-semibold text-black transition hover:bg-black/5">Resume <MoveRight size={18} /></a>
-            <a href="/projects" className="inline-flex items-center gap-2 rounded-full border border-black/20 bg-white px-5 py-3 font-semibold text-black transition hover:bg-black/5">Projects <MoveRight size={18} /></a>
+    <section id="home" className="py-8 sm:py-12 lg:py-16">
+      <div className="grid items-center gap-12 lg:grid-cols-12">
+        <div className="lg:col-span-7 max-w-3xl">
+          <div className="mb-6 inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-[0.3em] text-slate-500">
+            <BrainCircuit size={16} className="text-slate-900" /> Hello, I&apos;m Akshatha
           </div>
-          <div className="mt-6 rounded-[1.5rem] border border-black/10 bg-black/5 p-4 text-sm text-black/70 backdrop-blur">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-black/60">Currently learning / open to</p>
-            <div className="mt-3 grid gap-3 sm:grid-cols-2">
+          
+          <h1 className="text-5xl font-black leading-[1.02] tracking-tight text-slate-900 sm:text-7xl lg:text-8xl">
+            Full Stack <br />
+            <span className="underline decoration-slate-300 underline-offset-8">Developer</span>
+          </h1>
+          
+          <p className="mt-6 text-xl font-bold text-slate-800 sm:text-2xl">
+            Building useful, performant digital experiences.
+          </p>
+          
+          <p className="mt-4 text-base leading-relaxed text-slate-600 sm:text-lg sm:leading-8">
+            I turn ideas into practical software with a strong mix of engineering discipline, visual design, and product thinking.
+          </p>
+          
+          <div className="mt-8 flex flex-wrap items-center gap-4">
+            <a
+              href="/contact"
+              className="btn-primary inline-flex items-center gap-2.5 rounded-full bg-slate-900 px-7 py-3.5 text-sm font-bold text-white shadow-xs transition-all duration-200 hover:bg-slate-800 hover:-translate-y-0.5 active:translate-y-0"
+            >
+              Hire Me <ArrowRight size={18} />
+            </a>
+            <a
+              href={resumePDF}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-secondary inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-6 py-3.5 text-sm font-bold text-slate-800 transition-all duration-200 hover:border-slate-900 hover:-translate-y-0.5 active:translate-y-0"
+            >
+              View Resume ↗
+            </a>
+            <a
+              href={resumePDF}
+              download="Akshatha_Resume.pdf"
+              className="btn-secondary inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-6 py-3.5 text-sm font-bold text-slate-800 transition-all duration-200 hover:border-slate-900 hover:-translate-y-0.5 active:translate-y-0"
+            >
+              Download Resume ↓
+            </a>
+            <a
+              href="/projects"
+              className="btn-secondary inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-6 py-3.5 text-sm font-bold text-slate-800 transition-all duration-200 hover:border-slate-900 hover:-translate-y-0.5 active:translate-y-0"
+            >
+              View Projects <MoveRight size={18} />
+            </a>
+          </div>
+
+          <div className="mt-12 pt-6 border-t border-slate-200/70">
+            <p className="text-[11px] font-extrabold uppercase tracking-[0.3em] text-slate-400">Currently learning / Open to</p>
+            <div className="mt-4 grid gap-6 sm:grid-cols-2">
               <div>
-                <p className="font-semibold text-black">Learning</p>
-                <ul className="mt-2 space-y-1 text-black/70">
-                  <li>• Deepening TypeScript and scalable UI systems</li>
-                  <li>• Exploring cloud-native deployment patterns</li>
+                <p className="font-bold text-slate-900 text-sm">Learning Focus</p>
+                <ul className="mt-2 space-y-1.5 text-sm text-slate-600">
+                  <li className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-slate-900" /> Deepening TypeScript & scalable UI systems</li>
+                  <li className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-slate-900" /> Exploring cloud deployment patterns</li>
                 </ul>
               </div>
               <div>
-                <p className="font-semibold text-black">Open to</p>
-                <ul className="mt-2 space-y-1 text-black/70">
-                  <li>• Frontend and full-stack product roles</li>
-                  <li>• Freelance builds and collaborative sprints</li>
+                <p className="font-bold text-slate-900 text-sm">Open To</p>
+                <ul className="mt-2 space-y-1.5 text-sm text-slate-600">
+                  <li className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-slate-900" /> Frontend & full-stack product roles</li>
+                  <li className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-slate-900" /> Collaborative sprints & freelance builds</li>
                 </ul>
               </div>
             </div>
-          </div>
-          <div className="mt-8 flex flex-wrap gap-3 text-sm">
-            <a href="/about" className="rounded-full border border-black/20 bg-white px-3 py-2 text-black transition hover:bg-black/5">About</a>
-            <a href="/projects" className="rounded-full border border-black/20 bg-white px-3 py-2 text-black transition hover:bg-black/5">Projects</a>
-            <a href="/contact" className="rounded-full border border-black/20 bg-white px-3 py-2 text-black transition hover:bg-black/5">Contact</a>
           </div>
         </div>
 
-        <motion.div whileHover={{ scale: 1.03, rotateY: -7, rotateX: 4, y: -6 }} transition={{ type: 'spring', stiffness: 220, damping: 16 }} className="rounded-[2rem] border border-black/10 bg-white p-6 shadow-md">
-          <div className="rounded-[1.5rem] border border-black/10 bg-white p-6">
-            <div className="flex items-center justify-center">
-              <div className="profile-ring relative flex h-40 w-40 items-center justify-center rounded-full p-[4px]">
-                {imageError ? <div className="flex h-full w-full items-center justify-center rounded-full bg-black/5 text-4xl font-black text-black">A</div> : <img loading="lazy" decoding="async" src="/assets/profile.jpg" alt="Portrait of Akshatha, full stack developer" onError={() => setImageError(true)} className="h-full w-full rounded-full object-cover" />}
+        <div className="lg:col-span-5 flex flex-col items-center justify-center text-center">
+          <div className="profile-ring relative flex h-56 w-56 sm:h-64 sm:w-64 items-center justify-center rounded-full p-1 border-2 border-slate-200 shadow-sm">
+            {imageError ? (
+              <div className="flex h-full w-full items-center justify-center rounded-full bg-slate-100 text-5xl font-extrabold text-slate-900">A</div>
+            ) : (
+              <img
+                loading="lazy"
+                decoding="async"
+                src={profileImage}
+                alt="Portrait of Akshatha, full stack developer"
+                onError={() => setImageError(true)}
+                className="h-full w-full rounded-full object-cover"
+              />
+            )}
+          </div>
+
+          <div className="mt-8 w-full max-w-sm text-left">
+            <p className="text-xs font-extrabold uppercase tracking-[0.3em] text-slate-400">Current Focus</p>
+            <h2 className="mt-2 text-xl font-extrabold text-slate-900">Crafting Full-Stack Products</h2>
+            <div className="mt-4 space-y-3 text-sm text-slate-700">
+              <div className="flex items-center gap-3 pb-2 border-b border-slate-200/60 font-semibold">
+                <span className="text-slate-400">01</span> Fast, scalable MERN applications
               </div>
-            </div>
-            <div className="mt-6 text-center">
-              <p className="text-sm uppercase tracking-[0.35em] text-black/60">Current Focus</p>
-              <h2 className="mt-2 text-2xl font-semibold text-black">Crafting full-stack products</h2>
-              <div className="mt-4 space-y-3 text-sm text-black/70">
-                <div className="rounded-xl border border-black/10 bg-black/5 p-3">Fast, scalable MERN applications</div>
-                <div className="rounded-xl border border-black/10 bg-black/5 p-3">DSA-driven problem solving</div>
-                <div className="rounded-xl border border-black/10 bg-black/5 p-3">Production-ready, user-centered builds</div>
+              <div className="flex items-center gap-3 pb-2 border-b border-slate-200/60 font-semibold">
+                <span className="text-slate-400">02</span> DSA-driven problem solving
+              </div>
+              <div className="flex items-center gap-3 pb-2 border-b border-slate-200/60 font-semibold">
+                <span className="text-slate-400">03</span> Production-ready, user-centered builds
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   )
@@ -419,123 +512,138 @@ function HomeSection({ glowStyle }) {
 
 function AboutSection() {
   return (
-    <section id="about" className="print-section space-y-10 px-2 py-6 sm:px-3 lg:px-5">
-      <div className="grid gap-8 items-stretch lg:grid-cols-[1.1fr_0.9fr]">
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} className="h-full rounded-[2rem] border border-black/10 bg-white p-8 shadow-md">
-          <p className="text-sm font-semibold uppercase tracking-[0.35em] text-black/60">About Me</p>
-          <h2 className="mt-3 text-3xl font-black sm:text-4xl text-black">Engineering graduate turning ideas into software.</h2>
-          <p className="mt-5 text-lg leading-8 text-black/70">I&apos;m Akshatha, a passionate full stack developer based in Coimbatore. My journey began with engineering and grew into software development through hands-on building, debugging, and solving real-world problems. I love exploring data structures and algorithms and translating them into polished applications that feel intuitive and useful.</p>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <a href="/assets/resume.pdf" className="rounded-full bg-black px-5 py-3 font-semibold text-white transition hover:bg-black/80">Download Resume</a>
-            <button type="button" onClick={() => window.print()} className="rounded-full border border-black/20 bg-white px-5 py-3 font-semibold text-black transition hover:bg-black/5">Print Resume</button>
-            <a href="/contact" className="rounded-full border border-black/20 bg-white px-5 py-3 font-semibold text-black transition hover:bg-black/5">Let&apos;s Connect</a>
-          </div>
-        </motion.div>
+    <section id="about" className="print-section py-8 space-y-16">
+      {/* Intro Editorial Block */}
+      <div className="max-w-4xl">
+        <p className="text-xs font-extrabold uppercase tracking-[0.35em] text-slate-400">About Me</p>
+        <h2 className="mt-3 text-4xl sm:text-5xl font-black text-slate-900 leading-tight">
+          Engineering graduate turning ideas into software.
+        </h2>
+        <p className="mt-6 text-lg sm:text-xl leading-relaxed text-slate-600 font-normal">
+          I&apos;m Akshatha, a passionate full stack developer based in Coimbatore. My journey began with engineering and grew into software development through hands-on building, debugging, and solving real-world problems. I love exploring data structures and algorithms and translating them into polished applications that feel intuitive and useful.
+        </p>
 
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.25 }} className="h-full rounded-[2rem] border border-black/10 bg-white p-8 shadow-md">
-          <div className="flex items-center gap-3">
-            <Trophy className="text-black/70" size={24} />
-            <h3 className="text-2xl font-bold text-black">Core Strengths</h3>
-          </div>
-          <div className="mt-6 space-y-4 text-black/70">
-            <div className="rounded-2xl border border-black/10 bg-black/5 p-4"><p className="font-semibold text-black">DSA & Problem Solving</p><p className="mt-1 text-sm">Comfortable with logic-driven development and efficient solutions.</p></div>
-            <div className="rounded-2xl border border-black/10 bg-black/5 p-4"><p className="font-semibold text-black">Full-Stack Builds</p><p className="mt-1 text-sm">From UI to database, I enjoy bringing complete products to life.</p></div>
-            <div className="rounded-2xl border border-black/10 bg-black/5 p-4"><p className="font-semibold text-black">Growth Mindset</p><p className="mt-1 text-sm">Always learning, iterating, and leveling up with every project.</p></div>
-          </div>
-        </motion.div>
+        <div className="mt-8 flex flex-wrap gap-4">
+          <a
+            href={resumePDF}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-primary inline-flex items-center gap-2.5 rounded-full bg-slate-900 px-6 py-3 text-sm font-bold text-white transition hover:bg-slate-800 hover:-translate-y-0.5 active:translate-y-0"
+          >
+            View Resume ↗
+          </a>
+          <a
+            href={resumePDF}
+            download="Akshatha_Resume.pdf"
+            className="btn-secondary inline-flex items-center gap-2.5 rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-bold text-slate-800 transition hover:border-slate-900 hover:-translate-y-0.5 active:translate-y-0"
+          >
+            Download Resume ↓
+          </a>
+          <button type="button" onClick={() => window.print()} className="btn-secondary rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-bold text-slate-800 transition hover:border-slate-900 hover:-translate-y-0.5 active:translate-y-0">
+            Print Resume
+          </button>
+          <a href="/contact" className="btn-secondary rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-bold text-slate-800 transition hover:border-slate-900 hover:-translate-y-0.5 active:translate-y-0">
+            Let&apos;s Connect
+          </a>
+        </div>
       </div>
 
-      <div className="rounded-[2rem] border border-black/10 bg-white p-8 shadow-md">
-        <p className="text-sm font-semibold uppercase tracking-[0.35em] text-black/60">Education</p>
-        <h3 className="mt-4 text-2xl font-bold text-black">Learning Journey</h3>
-        <div className="mt-6 space-y-4">
-          <div className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
-            <div className="flex items-start justify-between gap-4">
-              <div className="flex-1">
-                <h4 className="text-lg font-bold text-black">Kendriya Vidyalaya, Coimbatore</h4>
-                <p className="mt-1 text-sm text-black/60">Senior Secondary Education</p>
-              </div>
-              <span className="text-sm font-semibold text-black/70 whitespace-nowrap">2011 – 2023</span>
-            </div>
+      {/* Core Strengths Section */}
+      <div className="pt-8 border-t border-slate-200/70">
+        <div className="flex items-center gap-3 mb-8">
+          <Trophy className="text-slate-900" size={24} />
+          <h3 className="text-2xl font-extrabold text-slate-900">Core Strengths</h3>
+        </div>
+
+        <div className="grid gap-8 md:grid-cols-3">
+          <div className="pb-4 border-b md:border-b-0 md:border-r border-slate-200/70 pr-4">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400">01</span>
+            <h4 className="mt-2 text-xl font-bold text-slate-900">DSA & Problem Solving</h4>
+            <p className="mt-2 text-sm leading-relaxed text-slate-600">Comfortable with logic-driven development, algorithmic efficiency, and optimal structure.</p>
           </div>
-          <div className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
-            <div className="flex items-start justify-between gap-4">
-              <div className="flex-1">
-                <h4 className="text-lg font-bold text-black">Sri Shakthi Institute of Engineering and Technology, Coimbatore</h4>
-                <p className="mt-2 text-sm text-black/70">
-                  <span className="font-semibold">Bachelor of Engineering (B.E.)</span>
-                  <br />Computer Science and Engineering
-                </p>
-              </div>
-              <span className="text-sm font-semibold text-black/70 whitespace-nowrap">2023 – 2027</span>
-            </div>
+          <div className="pb-4 border-b md:border-b-0 md:border-r border-slate-200/70 pr-4">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400">02</span>
+            <h4 className="mt-2 text-xl font-bold text-slate-900">Full-Stack Builds</h4>
+            <p className="mt-2 text-sm leading-relaxed text-slate-600">From database modeling to modern UI components, I bring complete products to life.</p>
+          </div>
+          <div className="pb-4">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400">03</span>
+            <h4 className="mt-2 text-xl font-bold text-slate-900">Growth Mindset</h4>
+            <p className="mt-2 text-sm leading-relaxed text-slate-600">Always iterating, exploring modern tech stacks, and leveling up with every sprint.</p>
           </div>
         </div>
       </div>
 
-      <div className="rounded-[2rem] border border-black/10 bg-white p-8 shadow-md">
-        <p className="text-sm font-semibold uppercase tracking-[0.35em] text-black/60">Currently Learning / Open To</p>
-        <div className="mt-4 grid gap-6 lg:grid-cols-2">
-          <div>
-            <h4 className="text-xl font-bold text-black">Learning</h4>
-            <ul className="mt-3 space-y-2 text-black/70">
-              <li>• Deepening TypeScript patterns for resilient frontend architecture</li>
-              <li>• Exploring cloud deployment, serverless workflows, and API design</li>
-              <li>• Improving product thinking and cross-functional communication</li>
-            </ul>
+      {/* Education Timeline */}
+      <div className="pt-8 border-t border-slate-200/70">
+        <p className="text-xs font-extrabold uppercase tracking-[0.35em] text-slate-400">Education Timeline</p>
+        <h3 className="mt-2 text-3xl font-extrabold text-slate-900">Learning Journey</h3>
+
+        <div className="mt-8 space-y-8 pl-4 border-l-2 border-slate-200">
+          <div className="relative pl-6">
+            <span className="absolute -left-[25px] top-1.5 h-3 w-3 rounded-full bg-slate-900 ring-4 ring-[#fafafa]" />
+            <span className="text-xs font-extrabold uppercase tracking-[0.2em] text-slate-500">2023 – 2027</span>
+            <h4 className="mt-1 text-xl font-bold text-slate-900">Sri Shakthi Institute of Engineering and Technology, Coimbatore</h4>
+            <p className="mt-1 text-base font-semibold text-slate-700">Bachelor of Engineering (B.E.) — Computer Science and Engineering</p>
           </div>
-          <div>
-            <h4 className="text-xl font-bold text-black">Open To</h4>
-            <ul className="mt-3 space-y-2 text-black/70">
-              <li>• Frontend and full-stack product roles</li>
-              <li>• Freelance builds and collaborative sprints</li>
-              <li>• Internships, internships-to-full-time conversations, and mentorship opportunities</li>
-            </ul>
+
+          <div className="relative pl-6">
+            <span className="absolute -left-[25px] top-1.5 h-3 w-3 rounded-full bg-slate-400 ring-4 ring-[#fafafa]" />
+            <span className="text-xs font-extrabold uppercase tracking-[0.2em] text-slate-500">2011 – 2023</span>
+            <h4 className="mt-1 text-xl font-bold text-slate-900">Kendriya Vidyalaya, Coimbatore</h4>
+            <p className="mt-1 text-base font-semibold text-slate-600">Senior Secondary Education</p>
           </div>
         </div>
       </div>
 
-      <div className="grid gap-8 items-stretch xl:grid-cols-[1.15fr_0.85fr]">
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} className="h-full rounded-[2rem] border border-black/10 bg-white p-8 shadow-md">
+      {/* Skills & Certifications */}
+      <div className="pt-8 border-t border-slate-200/70 grid gap-12 lg:grid-cols-12">
+        <div className="lg:col-span-7">
           <div className="mb-6 flex items-center justify-between">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.35em] text-black/60">Skills</p>
-              <h3 className="mt-2 text-2xl font-bold text-black">Tech stack I&apos;m working with</h3>
+              <p className="text-xs font-extrabold uppercase tracking-[0.35em] text-slate-400">Tech Stack</p>
+              <h3 className="mt-1 text-2xl font-extrabold text-slate-900">Skills & Tooling</h3>
             </div>
-            <div className="hidden rounded-full border border-black/10 bg-black/5 px-3 py-2 text-sm font-semibold text-black sm:block">MERN + More</div>
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500">MERN + Tools</span>
           </div>
-          <div className="grid gap-4 lg:grid-cols-2">
+
+          <div className="grid gap-6 sm:grid-cols-2">
             {skillGroups.map((group) => {
               const Icon = group.icon
               return <SkillCard key={group.title} group={group} Icon={Icon} />
             })}
           </div>
-        </motion.div>
+        </div>
 
-        <motion.aside initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} className="h-full rounded-[2rem] border border-black/10 bg-white p-8 text-black shadow-md">
-          <div className="flex items-center gap-2 text-black/70"><BadgeCheck size={20} /><p className="text-sm font-semibold uppercase tracking-[0.35em]">Certifications</p></div>
-          <h3 className="mt-4 text-2xl font-bold text-black">Learning milestones and achievements</h3>
-          <div className="mt-6 space-y-6">
+        <div className="lg:col-span-5">
+          <div className="flex items-center gap-2 mb-6">
+            <BadgeCheck size={22} className="text-slate-900" />
+            <h3 className="text-2xl font-extrabold text-slate-900">Certifications</h3>
+          </div>
+
+          <div className="space-y-6">
             {certificationGroups.map((group) => (
-              <div key={group.category} className="rounded-2xl border border-black/10 bg-black/5 p-5">
-                <h4 className="text-lg font-semibold text-black">{group.category}</h4>
-                <div className="mt-4 space-y-3">
+              <div key={group.category} className="pb-4 border-b border-slate-200/70 last:border-0">
+                <h4 className="text-xs font-extrabold uppercase tracking-[0.25em] text-slate-400">{group.category}</h4>
+                <div className="mt-3 space-y-2.5">
                   {group.items.map((cert) => (
-                    <div key={cert.name} className="rounded-2xl border border-black/10 bg-white p-4">
-                      <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-                        <div>
-                          <p className="font-semibold text-black">{cert.name}</p>
-                          <p className="mt-1 text-sm text-black/60">{[cert.platform, cert.date].filter(Boolean).join(' • ')}</p>
-                        </div>
-                        {cert.link ? <a href={cert.link} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-sm font-medium text-black/70 transition hover:text-black">View Certificate <ArrowRight size={15} /></a> : null}
+                    <div key={cert.name} className="flex items-center justify-between gap-4">
+                      <div>
+                        <p className="font-bold text-slate-900 text-sm">{cert.name}</p>
+                        <p className="text-xs font-medium text-slate-500">{[cert.platform, cert.date].filter(Boolean).join(' • ')}</p>
                       </div>
+                      {cert.link && cert.link !== '#' ? (
+                        <a href={cert.link} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-xs font-bold text-slate-900 transition hover:underline">
+                          View ↗
+                        </a>
+                      ) : null}
                     </div>
                   ))}
                 </div>
               </div>
             ))}
           </div>
-        </motion.aside>
+        </div>
       </div>
     </section>
   )
@@ -547,35 +655,51 @@ function SkillCard({ group, Icon }) {
   const toggleFlip = () => setFlipped((value) => !value)
 
   return (
-    <motion.button type="button" whileHover={{ y: -6, scale: 1.01 }} className="flip-card group h-48 w-full text-left" onClick={toggleFlip} onKeyDown={(event) => {
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault()
-        toggleFlip()
-      }
-    }} aria-label={`Toggle ${group.title} skill details`}>
+    <motion.button
+      type="button"
+      whileHover={{ y: -4 }}
+      className="flip-card group h-52 w-full text-left outline-none"
+      onClick={toggleFlip}
+      onKeyDown={(event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault()
+          toggleFlip()
+        }
+      }}
+      aria-label={`Toggle ${group.title} skill details`}
+    >
       <div className={`flip-card-inner ${flipped ? 'flipped' : ''}`}>
-        <div className="flip-card-face flip-card-front rounded-2xl border border-black/10 bg-white p-4 text-black shadow-md">
+        <div className="flip-card-face flip-card-front rounded-2xl border border-slate-200/80 bg-white p-5 text-slate-900 shadow-2xs transition group-hover:border-slate-300">
           <div className="mb-4 flex items-center justify-between">
-            <Icon size={18} />
-            <span className="text-[10px] font-semibold uppercase tracking-[0.3em]">{group.title}</span>
+            <div className="rounded-xl border border-slate-200 bg-slate-50 p-2.5 text-slate-900">
+              <Icon size={20} />
+            </div>
+            <span className="text-[11px] font-extrabold uppercase tracking-[0.25em] text-slate-400">{group.title}</span>
           </div>
           <div className="mt-4">
-            <p className="text-lg font-semibold">{group.items[0].name}</p>
-            <p className="mt-2 text-sm text-black/60">Tap or hover to explore</p>
+            <p className="text-xl font-bold text-slate-900">{group.items[0].name}</p>
+            <p className="mt-1.5 text-xs font-semibold text-slate-500 flex items-center gap-1">
+              <span>Tap to reveal levels</span> <ArrowRight size={12} />
+            </p>
           </div>
         </div>
-        <div className="flip-card-face flip-card-back rounded-2xl border border-black/10 bg-white p-4 text-black shadow-md">
-          <div className="flex items-center justify-between"><span className="text-sm font-semibold">{group.title}</span><Sparkles size={16} className="text-black/60" /></div>
-          <div className="mt-4 space-y-3">
+        <div className="flip-card-face flip-card-back rounded-2xl border border-slate-200 bg-white p-5 text-slate-900 shadow-xs">
+          <div className="flex items-center justify-between pb-2 border-b border-slate-100">
+            <span className="text-xs font-extrabold uppercase tracking-[0.2em] text-slate-800">{group.title}</span>
+            <Sparkles size={16} className="text-slate-400" />
+          </div>
+          <div className="mt-3 space-y-2">
             {group.items.map((item) => {
               const ItemIcon = item.icon
               return (
-                <div key={item.name} className="rounded-xl border border-black/10 bg-black/5 p-2.5">
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="flex items-center gap-2"><ItemIcon size={14} />{item.name}</span>
-                    <span className="font-semibold text-black/70">{item.level}%</span>
+                <div key={item.name} className="rounded-xl border border-slate-100 bg-slate-50/80 p-2 text-xs">
+                  <div className="flex items-center justify-between font-bold text-slate-800">
+                    <span className="flex items-center gap-1.5"><ItemIcon size={14} className="text-slate-600" />{item.name}</span>
+                    <span className="font-extrabold text-slate-900">{item.level}%</span>
                   </div>
-                  <p className="mt-1 text-xs text-black/60">{item.note}</p>
+                  <div className="mt-1 w-full overflow-hidden rounded-full bg-slate-200/80 h-1">
+                    <div className="h-full bg-slate-900 rounded-full" style={{ width: `${item.level}%` }} />
+                  </div>
                 </div>
               )
             })}
@@ -590,51 +714,95 @@ function ProjectsSection() {
   const [activeCaseStudy, setActiveCaseStudy] = useState(null)
 
   return (
-    <section id="projects" className="px-2 py-6 sm:px-3 lg:px-4">
-      <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} className="mb-8 max-w-3xl">
-        <p className="text-sm font-semibold uppercase tracking-[0.35em] text-black/60">Projects</p>
-        <h2 className="mt-3 text-3xl font-black sm:text-4xl text-black">Selected builds that reflect my style, depth, and range.</h2>
-        <p className="mt-4 text-lg leading-8 text-black/70">I focus on thoughtful product decisions, measurable impact, and polished execution from the first wireframe through deployment.</p>
-      </motion.div>
+    <section id="projects" className="py-8 space-y-16">
+      <div className="max-w-3xl">
+        <p className="text-xs font-extrabold uppercase tracking-[0.35em] text-slate-400">Selected Works</p>
+        <h2 className="mt-2 text-4xl sm:text-5xl font-black text-slate-900">Featured Projects</h2>
+        <p className="mt-4 text-lg leading-relaxed text-slate-600 font-normal">
+          I focus on thoughtful product decisions, measurable impact, and polished execution from concept through production.
+        </p>
+      </div>
 
-      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+      <div className="space-y-12">
         {projects.map((project, index) => (
-          <motion.article key={project.title} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} whileHover={{ y: -8, scale: 1.02, rotateX: 5, rotateY: -4 }} transition={{ type: 'spring', stiffness: 220, damping: 16 }} className="group rounded-[1.5rem] border border-black/10 bg-white p-6 shadow-md transition duration-300 hover:shadow-lg">
-            <div className="mb-4 flex items-center justify-between"><div className="rounded-full bg-black/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-black/70">{index + 1}</div><MonitorSmartphone className="text-black/60" size={20} /></div>
-            <h3 className="text-xl font-bold text-black">{project.title}</h3>
-            <p className="mt-3 text-sm leading-7 text-black/70">{project.description}</p>
-            <div className="mt-3 rounded-2xl border border-black/10 bg-black/5 p-3">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-black/60">Impact snapshot</p>
-              <p className="mt-1 text-sm font-semibold text-black/80">{project.metric}</p>
-              <p className="mt-1 text-sm text-black/60">{project.impact}</p>
+          <div
+            key={project.title}
+            className="group pb-12 border-b border-slate-200/80 grid gap-8 lg:grid-cols-12 items-start transition-all duration-300"
+          >
+            <div className="lg:col-span-4">
+              <span className="text-xs font-extrabold uppercase tracking-[0.25em] text-slate-400">0{index + 1}</span>
+              <h3 className="mt-1 text-3xl font-black text-slate-900 group-hover:text-slate-800 transition-colors">
+                {project.title}
+              </h3>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {project.stack.map((tag) => (
+                  <span key={tag} className="rounded-md border border-slate-200 bg-white px-3 py-1 text-xs font-bold text-slate-700 shadow-2xs">
+                    {tag}
+                  </span>
+                ))}
+              </div>
             </div>
-            <div className="mt-4 flex flex-wrap gap-2">{project.stack.map((tag) => <span key={tag} className="rounded-full border border-black/10 bg-black/5 px-2.5 py-1 text-xs font-medium text-black/70">{tag}</span>)}</div>
-            <div className="mt-6 flex flex-wrap gap-3">
-              {project.caseStudy ? <button type="button" onClick={() => setActiveCaseStudy(project.caseStudy)} className="rounded-full border border-black/20 bg-white px-4 py-2 text-sm font-semibold text-black transition hover:bg-black/5">View Case Study</button> : null}
-              <a href={project.github} className="rounded-full border border-black/20 bg-white px-4 py-2 text-sm font-semibold text-black transition hover:bg-black/5">GitHub</a>
-              <a href={project.demo} className="rounded-full bg-black px-4 py-2 text-sm font-semibold text-white transition hover:bg-black/80">Live Demo</a>
+
+            <div className="lg:col-span-8 flex flex-col justify-between h-full">
+              <p className="text-base sm:text-lg leading-relaxed text-slate-600 font-normal">
+                {project.description}
+              </p>
+
+              <div className="mt-6 flex flex-wrap items-center gap-4 pt-2">
+                {project.demo ? (
+                  <a
+                    href={project.demo}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="btn-primary inline-flex items-center gap-2 rounded-full bg-slate-900 px-6 py-2.5 text-xs font-bold text-white transition hover:bg-slate-800 hover:-translate-y-0.5 active:translate-y-0"
+                  >
+                    View Live Project ↗
+                  </a>
+                ) : null}
+
+                {project.github ? (
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="btn-secondary inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-5 py-2.5 text-xs font-bold text-slate-800 transition hover:border-slate-900 hover:-translate-y-0.5 active:translate-y-0"
+                  >
+                    GitHub Code
+                  </a>
+                ) : null}
+
+                {project.caseStudy ? (
+                  <button
+                    type="button"
+                    onClick={() => setActiveCaseStudy(project.caseStudy)}
+                    className="btn-secondary rounded-full border border-slate-300 bg-white px-5 py-2.5 text-xs font-bold text-slate-800 transition hover:border-slate-900 hover:-translate-y-0.5 active:translate-y-0"
+                  >
+                    Read Case Study
+                  </button>
+                ) : null}
+              </div>
             </div>
-          </motion.article>
+          </div>
         ))}
       </div>
 
-      <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} className="mt-10 rounded-[1.5rem] border border-black/10 bg-white p-6 shadow-md">
-        <div className="flex flex-wrap items-start justify-between gap-4">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.35em] text-black/60">Open Source Contributions</p>
-            <h3 className="mt-2 text-2xl font-bold text-black">Shared learning and contribution work</h3>
-          </div>
-        </div>
-        <div className="mt-6 grid gap-4 lg:grid-cols-3">
+      {/* Open Source Section */}
+      <div className="pt-8 border-t border-slate-200/70">
+        <p className="text-xs font-extrabold uppercase tracking-[0.35em] text-slate-400">Open Source</p>
+        <h3 className="mt-2 text-2xl font-extrabold text-slate-900">Shared Contributions</h3>
+
+        <div className="mt-6 grid gap-8 md:grid-cols-3">
           {openSource.map((item) => (
-            <div key={item.repo} className="rounded-2xl border border-black/10 bg-black/5 p-4">
-              <p className="text-lg font-semibold text-black">{item.repo}</p>
-              <p className="mt-2 text-sm leading-7 text-black/70">{item.description}</p>
-              <a href={item.link} className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-black/70 transition hover:text-black">View PR / Commit <ArrowRight size={15} /></a>
+            <div key={item.repo} className="pb-4 border-b md:border-b-0 md:border-r border-slate-200/70 pr-4 last:border-0">
+              <p className="text-lg font-bold text-slate-900">{item.repo}</p>
+              <p className="mt-2 text-sm leading-relaxed text-slate-600">{item.description}</p>
+              <a href={item.link} className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold text-slate-900 transition hover:underline">
+                View PR / Commit ↗
+              </a>
             </div>
           ))}
         </div>
-      </motion.div>
+      </div>
 
       <AnimatePresence>{activeCaseStudy ? <CaseStudyModal project={activeCaseStudy} onClose={() => setActiveCaseStudy(null)} /> : null}</AnimatePresence>
     </section>
@@ -643,37 +811,39 @@ function ProjectsSection() {
 
 function CaseStudyModal({ project, onClose }) {
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[80] flex items-center justify-center bg-black/20 px-4 py-6">
-      <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 20, opacity: 0 }} role="dialog" aria-modal="true" className="max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-[2rem] border border-black/10 bg-white p-6 shadow-lg">
-        <div className="flex items-start justify-between gap-4">
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[80] flex items-center justify-center bg-slate-900/50 p-4 sm:p-6 backdrop-blur-xs">
+      <motion.div initial={{ y: 20, opacity: 0, scale: 0.98 }} animate={{ y: 0, opacity: 1, scale: 1 }} exit={{ y: 20, opacity: 0, scale: 0.98 }} role="dialog" aria-modal="true" className="max-h-[85vh] w-full max-w-3xl overflow-y-auto rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-xl">
+        <div className="flex items-start justify-between gap-4 pb-4 border-b border-slate-100">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.35em] text-black/60">Case Study</p>
-            <h3 className="mt-2 text-2xl font-bold text-black">{project.title}</h3>
+            <p className="text-xs font-bold uppercase tracking-[0.35em] text-slate-400">Case Study</p>
+            <h3 className="mt-1 text-2xl sm:text-3xl font-extrabold text-slate-900">{project.title}</h3>
           </div>
-          <button type="button" onClick={onClose} className="rounded-full border border-black/20 px-3 py-2 text-sm font-semibold text-black transition hover:bg-black/5">Close</button>
+          <button type="button" onClick={onClose} className="btn-secondary rounded-full border border-slate-300 bg-white px-4 py-2 text-xs font-bold text-slate-800 transition hover:border-slate-900">Close</button>
         </div>
-        <div className="mt-6 grid gap-4 md:grid-cols-2">
-          <div className="rounded-2xl border border-black/10 bg-black/5 p-4">
-            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-black/60">Problem</p>
-            <p className="mt-2 text-sm leading-7 text-black/70">{project.problem}</p>
+        <div className="mt-6 grid gap-6 md:grid-cols-2">
+          <div>
+            <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-slate-400">Problem</p>
+            <p className="mt-1 text-sm leading-relaxed text-slate-700">{project.problem}</p>
           </div>
-          <div className="rounded-2xl border border-black/10 bg-black/5 p-4">
-            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-black/60">Approach</p>
-            <p className="mt-2 text-sm leading-7 text-black/70">{project.approach}</p>
+          <div>
+            <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-slate-400">Approach</p>
+            <p className="mt-1 text-sm leading-relaxed text-slate-700">{project.approach}</p>
           </div>
-          <div className="rounded-2xl border border-black/10 bg-black/5 p-4">
-            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-black/60">Tech Decisions</p>
-            <p className="mt-2 text-sm leading-7 text-black/70">{project.decisions}</p>
+          <div>
+            <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-slate-400">Tech Decisions</p>
+            <p className="mt-1 text-sm leading-relaxed text-slate-700">{project.decisions}</p>
           </div>
-          <div className="rounded-2xl border border-black/10 bg-black/5 p-4">
-            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-black/60">Outcome</p>
-            <p className="mt-2 text-sm leading-7 text-black/70">{project.outcome}</p>
+          <div>
+            <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-slate-400">Outcome</p>
+            <p className="mt-1 text-sm leading-relaxed text-slate-700">{project.outcome}</p>
           </div>
         </div>
-        <div className="mt-4 rounded-2xl border border-black/10 bg-black/5 p-4 text-sm text-black/70">
-          <p className="font-semibold text-black">What I&apos;d Improve</p>
-          <p className="mt-2 leading-7">{project.improve}</p>
-        </div>
+        {project.improve && (
+          <div className="mt-6 pt-4 border-t border-slate-100 text-sm">
+            <p className="font-bold text-slate-900">What I&apos;d Improve</p>
+            <p className="mt-1 leading-relaxed text-slate-700">{project.improve}</p>
+          </div>
+        )}
       </motion.div>
     </motion.div>
   )
@@ -731,38 +901,86 @@ function ContactSection({ setToast, setToastMessage }) {
   }
 
   return (
-    <section id="contact" className="grid gap-8 px-2 py-6 lg:grid-cols-[0.95fr_1.05fr] lg:px-3">
-      <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} className="rounded-[2rem] border border-black/10 bg-white p-8 text-black shadow-md">
-        <p className="text-sm font-semibold uppercase tracking-[0.35em] text-black/60">Contact</p>
-        <h2 className="mt-3 text-3xl font-black sm:text-4xl">Let&apos;s build something meaningful together.</h2>
-        <p className="mt-4 text-lg leading-8 text-black/70">Whether it&apos;s a freelance build, an internship opportunity, or a collaborative product idea, I&apos;m always open to a conversation.</p>
-        <div className="mt-8 space-y-3">
-          <a href="https://github.com/Akshatha2312" target="_blank" rel="noreferrer" className="flex items-center gap-3 rounded-2xl border border-black/10 bg-black/5 px-4 py-3 text-black transition hover:bg-black/10"><Globe size={18} /> <span>github.com/Akshatha2312</span></a>
-          <a href="https://linkedin.com/in/akshatha23" target="_blank" rel="noreferrer" className="flex items-center gap-3 rounded-2xl border border-black/10 bg-black/5 px-4 py-3 text-black transition hover:bg-black/10"><Globe size={18} /> <span>linkedin.com/in/akshatha23</span></a>
-          <a href="https://leetcode.com/u/AKSHATH2312" target="_blank" rel="noreferrer" className="flex items-center gap-3 rounded-2xl border border-black/10 bg-black/5 px-4 py-3 text-black transition hover:bg-black/10"><Trophy size={18} /> <span>leetcode.com/u/AKSHATH2312</span></a>
+    <section id="contact" className="py-8 grid gap-12 lg:grid-cols-12 items-start">
+      <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} className="lg:col-span-5 space-y-6">
+        <div>
+          <p className="text-xs font-extrabold uppercase tracking-[0.35em] text-slate-400">Contact</p>
+          <h2 className="mt-2 text-4xl sm:text-5xl font-black text-slate-900 leading-tight">Let&apos;s work together.</h2>
+          <p className="mt-4 text-base sm:text-lg leading-relaxed text-slate-600">
+            Have an idea, freelance project, or full-time opportunity in mind? I&apos;m always open to a conversation.
+          </p>
+        </div>
+
+        <div className="pt-6 border-t border-slate-200/70 space-y-4">
+          <a href="https://github.com/Akshatha2312" target="_blank" rel="noreferrer" className="group flex items-center justify-between border-b border-slate-200/60 pb-3 font-bold text-slate-900 transition hover:text-slate-600">
+            <span className="flex items-center gap-3"><Globe size={18} className="text-slate-500" /> github.com/Akshatha2312</span>
+            <span className="text-sm transition-transform duration-200 group-hover:translate-x-1">↗</span>
+          </a>
+          <a href="https://linkedin.com/in/akshatha23" target="_blank" rel="noreferrer" className="group flex items-center justify-between border-b border-slate-200/60 pb-3 font-bold text-slate-900 transition hover:text-slate-600">
+            <span className="flex items-center gap-3"><Globe size={18} className="text-slate-500" /> linkedin.com/in/akshatha23</span>
+            <span className="text-sm transition-transform duration-200 group-hover:translate-x-1">↗</span>
+          </a>
+          <a href="https://leetcode.com/u/AKSHATH2312" target="_blank" rel="noreferrer" className="group flex items-center justify-between border-b border-slate-200/60 pb-3 font-bold text-slate-900 transition hover:text-slate-600">
+            <span className="flex items-center gap-3"><Trophy size={18} className="text-slate-500" /> leetcode.com/u/AKSHATH2312</span>
+            <span className="text-sm transition-transform duration-200 group-hover:translate-x-1">↗</span>
+          </a>
         </div>
       </motion.div>
-      <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} className="rounded-[2rem] border border-black/10 bg-white p-8 shadow-md">
-        <form onSubmit={handleSubmit} className="space-y-4">
+
+      <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} className="lg:col-span-7">
+        <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label className="mb-2 block text-sm font-semibold text-black">Name</label>
-            <input value={formData.name} onChange={(event) => setFormData((prev) => ({ ...prev, name: event.target.value }))} className={`w-full rounded-2xl border px-4 py-3 outline-none transition ${errors.name ? 'border-black/20 bg-black/5' : 'border-black/10 bg-white focus:border-black/20 focus:bg-white'}`} placeholder="Your name" />
-            {errors.name && <p className="mt-2 text-sm text-black/70">{errors.name}</p>}
+            <label className="mb-2 block text-xs font-extrabold uppercase tracking-[0.2em] text-slate-500">Name</label>
+            <input
+              value={formData.name}
+              onChange={(event) => setFormData((prev) => ({ ...prev, name: event.target.value }))}
+              className={`w-full border-b py-3 text-base text-slate-900 font-medium outline-none transition-colors ${
+                errors.name ? 'border-red-500 bg-red-50/20' : 'border-slate-300 bg-transparent focus:border-slate-900'
+              }`}
+              placeholder="Your name"
+            />
+            {errors.name && <p className="mt-1 text-xs font-semibold text-red-600">{errors.name}</p>}
           </div>
+
           <div>
-            <label className="mb-2 block text-sm font-semibold text-black">Email</label>
-            <input type="email" value={formData.email} onChange={(event) => setFormData((prev) => ({ ...prev, email: event.target.value }))} className={`w-full rounded-2xl border px-4 py-3 outline-none transition ${errors.email ? 'border-black/20 bg-black/5' : 'border-black/10 bg-white focus:border-black/20 focus:bg-white'}`} placeholder="you@example.com" />
-            {errors.email && <p className="mt-2 text-sm text-black/70">{errors.email}</p>}
+            <label className="mb-2 block text-xs font-extrabold uppercase tracking-[0.2em] text-slate-500">Email</label>
+            <input
+              type="email"
+              value={formData.email}
+              onChange={(event) => setFormData((prev) => ({ ...prev, email: event.target.value }))}
+              className={`w-full border-b py-3 text-base text-slate-900 font-medium outline-none transition-colors ${
+                errors.email ? 'border-red-500 bg-red-50/20' : 'border-slate-300 bg-transparent focus:border-slate-900'
+              }`}
+              placeholder="you@example.com"
+            />
+            {errors.email && <p className="mt-1 text-xs font-semibold text-red-600">{errors.email}</p>}
           </div>
+
           <div>
-            <label className="mb-2 block text-sm font-semibold text-black">Message</label>
-            <textarea rows="5" value={formData.message} onChange={(event) => setFormData((prev) => ({ ...prev, message: event.target.value }))} className={`w-full rounded-2xl border px-4 py-3 outline-none transition ${errors.message ? 'border-black/20 bg-black/5' : 'border-black/10 bg-white focus:border-black/20 focus:bg-white'}`} placeholder="Tell me about your idea..." />
-            {errors.message && <p className="mt-2 text-sm text-black/70">{errors.message}</p>}
+            <label className="mb-2 block text-xs font-extrabold uppercase tracking-[0.2em] text-slate-500">Message</label>
+            <textarea
+              rows="4"
+              value={formData.message}
+              onChange={(event) => setFormData((prev) => ({ ...prev, message: event.target.value }))}
+              className={`w-full border-b py-3 text-base text-slate-900 font-medium outline-none transition-colors ${
+                errors.message ? 'border-red-500 bg-red-50/20' : 'border-slate-300 bg-transparent focus:border-slate-900'
+              }`}
+              placeholder="Tell me about your project or idea..."
+            />
+            {errors.message && <p className="mt-1 text-xs font-semibold text-red-600">{errors.message}</p>}
           </div>
+
           {status.message && (
-            <div className="rounded-2xl border border-black/10 bg-black/5 px-4 py-3 text-sm text-black/70">{status.message}</div>
+            <div className={`rounded-xl border p-4 text-sm font-semibold ${status.type === 'error' ? 'border-red-200 bg-red-50 text-red-700' : status.type === 'success' ? 'border-emerald-200 bg-emerald-50 text-emerald-800' : 'border-slate-200 bg-slate-100 text-slate-700'}`}>
+              {status.message}
+            </div>
           )}
-          <button type="submit" disabled={isSubmitting} className="inline-flex items-center gap-2 rounded-full bg-black px-5 py-3 font-semibold text-white transition hover:bg-black/80 disabled:cursor-not-allowed disabled:bg-black/60">
+
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="btn-primary inline-flex items-center gap-2.5 rounded-full bg-slate-900 px-8 py-3.5 text-sm font-bold text-white transition-all duration-200 hover:bg-slate-800 hover:-translate-y-0.5 active:translate-y-0 disabled:cursor-not-allowed disabled:bg-slate-400"
+          >
             {isSubmitting ? 'Sending…' : 'Send Message'} <ArrowRight size={18} />
           </button>
         </form>

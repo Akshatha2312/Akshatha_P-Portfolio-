@@ -1,49 +1,96 @@
 :root {
-  font-family: Inter, 'Segoe UI', Roboto, sans-serif;
-  line-height: 1.5;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.6;
   font-weight: 400;
   color: #0f172a;
-  background-color: #020617;
+  background-color: #fafafa;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-html {
-  scroll-behavior: smooth;
+/* Explicit High-Contrast Primary Button (Dark Fill + White Text) */
+.btn-primary,
+button.btn-primary,
+a.btn-primary {
+  background-color: #0f172a !important;
+  color: #ffffff !important;
+  text-decoration: none !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
-body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
-  background: #020617;
+.btn-primary:hover,
+button.btn-primary:hover,
+a.btn-primary:hover {
+  background-color: #1e293b !important;
+  color: #ffffff !important;
+  transform: translateY(-2px);
 }
 
-* {
-  box-sizing: border-box;
+.btn-primary:active,
+button.btn-primary:active,
+a.btn-primary:active {
+  background-color: #020617 !important;
+  color: #ffffff !important;
+  transform: translateY(0);
 }
 
-#root {
-  min-height: 100vh;
+.btn-primary:disabled,
+button.btn-primary:disabled,
+a.btn-primary:disabled {
+  background-color: #94a3b8 !important;
+  color: #ffffff !important;
+  cursor: not-allowed !important;
+  opacity: 0.7 !important;
+  transform: none !important;
 }
 
-a {
-  text-decoration: none;
+.btn-primary *,
+button.btn-primary *,
+a.btn-primary * {
+  color: #ffffff !important;
 }
 
-button,
-input,
-textarea {
-  font: inherit;
+/* Explicit High-Contrast Secondary Button (White Fill + Dark Text + Border) */
+.btn-secondary,
+button.btn-secondary,
+a.btn-secondary {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border: 1px solid #cbd5e1 !important;
+  text-decoration: none !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.btn-secondary:hover,
+button.btn-secondary:hover,
+a.btn-secondary:hover {
+  background-color: #f8fafc !important;
+  border-color: #0f172a !important;
+  color: #0f172a !important;
+  transform: translateY(-2px);
+}
+
+.btn-secondary:active,
+button.btn-secondary:active,
+a.btn-secondary:active {
+  background-color: #f1f5f9 !important;
+  color: #0f172a !important;
+  transform: translateY(0);
+}
+
+.btn-secondary *,
+button.btn-secondary *,
+a.btn-secondary * {
+  color: #0f172a !important;
 }
 
 button:focus-visible,
 a:focus-visible,
 input:focus-visible,
 textarea:focus-visible {
-  outline: 3px solid rgba(244, 114, 182, 0.8);
+  outline: 2px solid #0f172a;
   outline-offset: 3px;
 }
 
@@ -59,19 +106,15 @@ textarea:focus-visible {
   border: 0;
 }
 
+/* Profile Ring Minimal Presentation */
 .profile-ring {
-  background: #fff;
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+  background: #ffffff;
+  box-shadow: 0 4px 20px -5px rgba(15, 23, 42, 0.08);
+  position: relative;
+  overflow: hidden;
 }
 
-.profile-ring::before {
-  content: '';
-  position: absolute;
-  inset: -8px;
-  border-radius: 999px;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-}
-
+/* Interactive Flip Cards */
 .flip-card {
   perspective: 1200px;
 }
@@ -80,23 +123,39 @@ textarea:focus-visible {
   position: relative;
   height: 100%;
   transform-style: preserve-3d;
-  transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
 }
 
 .flip-card-inner.flipped,
 .flip-card:hover .flip-card-inner {
-  transform: rotateY(180deg) scale(1.02);
+  transform: rotateY(180deg);
 }
 
 .flip-card-face {
   position: absolute;
   inset: 0;
   backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .flip-card-back {
   transform: rotateY(180deg);
+}
+
+/* Vertical Timeline Line */
+.timeline-axis {
+  position: relative;
+}
+
+.timeline-axis::before {
+  content: '';
+  position: absolute;
+  left: 7px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background-color: rgba(15, 23, 42, 0.12);
 }
 
 @media print {
@@ -125,14 +184,5 @@ textarea:focus-visible {
   }
 }
 
-@keyframes pulseRing {
-  0%,
-  100% {
-    transform: scale(1);
-    opacity: 0.7;
-  }
-  50% {
-    transform: scale(1.04);
-    opacity: 1;
-  }
-}
+
+
